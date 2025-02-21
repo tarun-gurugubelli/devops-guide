@@ -23,14 +23,14 @@ export default function RootLayout({
         <header className="border-b">
           <div className="container mx-auto px-4 h-14 flex items-center justify-between">
             <Link href="/" className="font-semibold text-lg">
-              DevOps Knowledge Board
+              DevOps
             </Link>
             <nav className="flex gap-6">
               <Link href="/modules" className="text-sm font-medium hover:text-primary">
                 Modules
               </Link>
               <Link href="/questions" className="text-sm font-medium hover:text-primary">
-                Browse All Questions
+                All Qn's
               </Link>
               <Link href="/contact" className="text-sm font-medium hover:text-primary">
                 Contact
