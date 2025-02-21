@@ -54,7 +54,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="relative aspect-square">
-            <Image src="/data/tarun.jpg" alt="Developer" fill className="object-cover rounded-lg" priority />
+            <Image src="/devops-guide/data/tarun.jpg" alt="Developer" fill className="object-cover rounded-lg" priority />
           </div>
         </div>
       </section>
