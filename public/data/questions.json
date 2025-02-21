@@ -1,0 +1,43 @@
+{
+    "questions": [
+      {
+        "category": "General",
+        "items": [
+          {
+            "question": "What services do you offer?",
+            "answer": "We offer a wide range of services including web development, mobile app development, and cloud solutions. Our team specializes in creating modern, scalable applications using the latest technologies."
+          },
+          {
+            "question": "How can I get started?",
+            "answer": "Getting started is easy! Simply contact our team through the contact form or schedule a consultation. We'll discuss your needs and create a tailored solution for your project."
+          }
+        ]
+      },
+      {
+        "category": "Technical",
+        "items": [
+          {
+            "question": "What technologies do you use?",
+            "answer": "We use modern technologies like React, Next.js, Node.js, and various cloud services. Our stack is constantly evolving to ensure we're using the best tools for each project."
+          },
+          {
+            "question": "Do you provide technical support?",
+            "answer": "Yes, we provide comprehensive technical support for all our services. Our support team is available during business hours to help resolve any issues you may encounter."
+          }
+        ]
+      },
+      {
+        "category": "Billing",
+        "items": [
+          {
+            "question": "What are your payment terms?",
+            "answer": "We offer flexible payment terms including monthly and annual subscriptions. Custom payment plans are available for large projects. All major credit cards and bank transfers are accepted."
+          },
+          {
+            "question": "Do you offer refunds?",
+            "answer": "Yes, we offer refunds within 30 days of purchase if you're not satisfied with our services. Please contact our support team to initiate the refund process."
+          }
+        ]
+      }
+    ]
+  }

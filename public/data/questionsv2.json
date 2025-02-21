@@ -1,0 +1,568 @@
+{
+    "questions": [
+        {
+            "category": "docker",
+            "items": [
+                {
+                    "question": "What is Docker architecture?",
+                    "answer": "Docker uses a client-server architecture. The Docker client (CLI) communicates with the Docker daemon (server), which builds, runs, and manages Docker containers. The Docker daemon interacts with the Docker registry (e.g., Docker Hub) to pull or push images. Key components include:\n- Docker Client: CLI for interacting with Docker.\n- Docker Daemon: Background service managing containers, images, networks, and volumes.\n- Docker Images: Read-only templates used to create containers.\n- Docker Containers: Runnable instances of Docker images.\n- Docker Registry: Stores Docker images (e.g., Docker Hub)."
+                },
+                {
+                    "question": "What is Docker lifecycle?",
+                    "answer": "The Docker lifecycle involves the following stages:\n1. **Create**: Write a Dockerfile and build an image using `docker build`.\n2. **Run**: Start a container using `docker run`.\n3. **Pause/Unpause**: Temporarily stop or resume a container using `docker pause` and `docker unpause`.\n4. **Stop**: Gracefully stop a container using `docker stop`.\n5. **Start**: Restart a stopped container using `docker start`.\n6. **Restart**: Reboot a running container using `docker restart`.\n7. **Remove**: Delete a container using `docker rm`.\n8. **Commit**: Save a container's state as a new image using `docker commit`.\n9. **Push/Pull**: Share images via a Docker registry using `docker push` and `docker pull`."
+                },
+                {
+                    "question": "What is Dockerfile and Docker Compose file?",
+                    "answer": "- **Dockerfile**: A text file containing instructions to build a Docker image. It defines the base image, dependencies, environment variables, and commands to run.\n- **Docker Compose file**: A YAML file (`docker-compose.yml`) used to define and manage multi-container Docker applications. It specifies services, networks, volumes, and dependencies between containers."
+                },
+                {
+                    "question": "Explain various layers in a Dockerfile.",
+                    "answer": "Each instruction in a Dockerfile creates a new layer in the image. Layers are stacked to form the final image. Key layers include:\n1. **FROM**: Specifies the base image.\n2. **RUN**: Executes commands to install dependencies or configure the image.\n3. **COPY/ADD**: Adds files or directories from the host to the image.\n4. **WORKDIR**: Sets the working directory for subsequent instructions.\n5. **ENV**: Sets environment variables.\n6. **EXPOSE**: Declares the ports the container will listen on.\n7. **CMD/ENTRYPOINT**: Defines the default command or application to run when the container starts."
+                },
+                {
+                    "question": "What is Docker networking and tell various types of network in Docker?",
+                    "answer": "Docker networking enables communication between containers, hosts, and external systems. Docker provides several network types:\n1. **Bridge**: Default network for containers on the same host.\n2. **Host**: Removes network isolation between the container and the host.\n3. **Overlay**: Enables multi-host communication, used in Docker Swarm.\n4. **Macvlan**: Assigns a MAC address to a container, making it appear as a physical device.\n5. **None**: Disables networking for the container."
+                },
+                {
+                    "question": "What is the default network in Docker?",
+                    "answer": "The default network in Docker is the **bridge network**. When you create a container without specifying a network, it connects to the bridge network. Containers on the same bridge network can communicate with each other using IP addresses."
+                },
+                {
+                    "question": "How does one container talk to another container?",
+                    "answer": "Containers can communicate with each other using:\n1. **Container Names**: Use the container name as a hostname (e.g., `ping container_name`).\n2. **Docker Network**: Place containers on the same custom bridge network for automatic DNS resolution.\n3. **Links**: Legacy method using the `--link` flag (not recommended).\n4. **Host IP**: Use the host's IP address and exposed ports."
+                },
+                {
+                    "question": "How to debug the container?",
+                    "answer": "Debugging a container involves:\n1. **Logs**: View container logs using `docker logs <container_id>`.\n2. **Exec**: Run commands inside a running container using `docker exec -it <container_id> /bin/bash`.\n3. **Inspect**: Get detailed container information using `docker inspect <container_id>`.\n4. **Attach**: Attach to a running container's console using `docker attach <container_id>`.\n5. **Health Checks**: Use health checks in the Dockerfile or Compose file to monitor container status."
+                },
+                {
+                    "question": "What is Docker Swarm?",
+                    "answer": "Docker Swarm is a native clustering and orchestration tool for Docker. It allows you to create and manage a cluster of Docker nodes as a single virtual system. Key features include:\n- **Service Deployment**: Deploy and scale services across multiple nodes.\n- **Load Balancing**: Automatically distribute traffic across containers.\n- **High Availability**: Ensure services are always running.\n- **Rolling Updates**: Update services without downtime."
+                },
+                {
+                    "question": "Tell some commands in Docker.",
+                    "answer": "Common Docker commands include:\n- `docker build`: Build an image from a Dockerfile.\n- `docker run`: Run a container from an image.\n- `docker ps`: List running containers.\n- `docker stop`: Stop a running container.\n- `docker rm`: Remove a container.\n- `docker images`: List all images.\n- `docker rmi`: Remove an image.\n- `docker pull`: Pull an image from a registry.\n- `docker push`: Push an image to a registry.\n- `docker network`: Manage Docker networks.\n- `docker-compose up`: Start services defined in a Compose file."
+                },
+                {
+                    "question": "What is the difference between ADD/COPY, CMD/ENTRYPOINT, RUN/CMD?",
+                    "answer": "- **ADD vs COPY**:\n  - `ADD`: Can copy files and extract tar files from URLs or local paths.\n  - `COPY`: Only copies files or directories from the host to the container.\n- **CMD vs ENTRYPOINT**:\n  - `CMD`: Provides default arguments for the container. Can be overridden at runtime.\n  - `ENTRYPOINT`: Defines the main command to run. Arguments are appended to it.\n- **RUN vs CMD**:\n  - `RUN`: Executes commands during image build.\n  - `CMD`: Specifies the default command to run when the container starts."
+                },
+                {
+                    "question": "Tell the Dockerfile best practices.",
+                    "answer": "Best practices for writing Dockerfiles include:\n1. Use a `.dockerignore` file to exclude unnecessary files.\n2. Use multi-stage builds to reduce image size.\n3. Minimize the number of layers by combining commands.\n4. Use specific base images (e.g., `alpine` for smaller images).\n5. Avoid running containers as root.\n6. Use `COPY` instead of `ADD` unless extracting files.\n7. Use `ENTRYPOINT` for the main command and `CMD` for default arguments.\n8. Clean up unnecessary files in the same layer they are created."
+                },
+                {
+                    "question": "How to reduce a Dockerfile size?",
+                    "answer": "To reduce Dockerfile size:\n1. Use multi-stage builds to discard intermediate layers.\n2. Use lightweight base images (e.g., `alpine`).\n3. Combine multiple `RUN` commands into one.\n4. Remove unnecessary dependencies and files.\n5. Use `.dockerignore` to exclude unnecessary files from the build context."
+                },
+                {
+                    "question": "How to store the Dockerfile in JFrog/Docker Hub?",
+                    "answer": "To store a Dockerfile in JFrog Artifactory or Docker Hub:\n1. Build the Docker image using `docker build -t <image_name>`.\n2. Tag the image with the registry URL: `docker tag <image_name> <registry>/<image_name>:<tag>`.\n3. Push the image to the registry: `docker push <registry>/<image_name>:<tag>`.\n4. For JFrog, configure the Docker registry in Artifactory and use the JFrog CLI."
+                },
+                {
+                    "question": "How to create a Docker image if no internet connectivity is there?",
+                    "answer": "To create a Docker image offline:\n1. Download the base image and dependencies on a machine with internet access.\n2. Save the image as a tar file: `docker save -o <image_name>.tar <image_name>`.\n3. Transfer the tar file to the offline machine.\n4. Load the image: `docker load -i <image_name>.tar`.\n5. Build the Dockerfile using the loaded image."
+                },
+                {
+                    "question": "Write a Dockerfile and state various layers and use the depends_on concept.",
+                    "answer": "Example Dockerfile:\n```dockerfile\nFROM python:3.8-slim AS base\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install -r requirements.txt\nCOPY . .\nCMD [\"python\", \"app.py\"]\n```\nLayers:\n1. `FROM`: Base image layer.\n2. `WORKDIR`: Sets the working directory.\n3. `COPY`: Adds `requirements.txt`.\n4. `RUN`: Installs dependencies.\n5. `COPY`: Adds the rest of the application code.\n6. `CMD`: Defines the default command.\n\nFor `depends_on`, use Docker Compose:\n```yaml\nversion: '3'\nservices:\n  web:\n    build: .\n    depends_on:\n      - db\n  db:\n    image: postgres\n```"
+                },
+                {
+                    "question": "How to save a container as an image and then as a zip file?",
+                    "answer": "1. Commit the container as an image: `docker commit <container_id> <image_name>`.\n2. Save the image as a tar file: `docker save -o <image_name>.tar <image_name>`.\n3. Compress the tar file into a zip file: `zip <image_name>.zip <image_name>.tar`."
+                },
+                {
+                    "question": "What are Docker volumes?",
+                    "answer": "Docker volumes are used to persist data outside the container's filesystem. They are managed by Docker and can be shared between containers. Volumes are stored in `/var/lib/docker/volumes` on the host. Use cases include:\n- Persisting database data.\n- Sharing data between containers.\n- Backing up and restoring data."
+                }
+            ]
+        },
+        {
+            "category": "kubernetes",
+            "items": [
+                {
+                    "question": "What is the architecture of Kubernetes?",
+                    "answer": "Kubernetes follows a master-worker architecture. The Master Node controls and manages the cluster and consists of components like the API Server, Scheduler, Controller Manager, and etcd. The Worker Node runs the actual workloads (containers) and consists of components like the Kubelet, Kube Proxy, and container runtime (e.g., Docker, containerd). The architecture is designed to be highly scalable, fault-tolerant, and declarative."
+                },
+                {
+                    "question": "What does Control Manager, etcd, Scheduler, API Server do?",
+                    "answer": "- API Server: Acts as the front-end for the Kubernetes control plane. It exposes the Kubernetes API and handles RESTful requests (e.g., creating, updating, or deleting resources).\n- Scheduler: Assigns workloads (Pods) to appropriate worker nodes based on resource availability, constraints, and policies.\n- Controller Manager: Manages various controllers (e.g., Node Controller, Replication Controller) that ensure the desired state of the cluster matches the actual state.\n- etcd: A distributed key-value store that stores the cluster\u2019s configuration data, state, and metadata. It acts as the 'source of truth' for the cluster."
+                },
+                {
+                    "question": "What is a manifest file and what are the components of it?",
+                    "answer": "A manifest file is a YAML or JSON file that defines the desired state of a Kubernetes resource (e.g., Pod, Deployment, Service). It includes:\n- apiVersion: The Kubernetes API version (e.g., v1, apps/v1).\n- kind: The type of resource (e.g., Pod, Deployment, Service).\n- metadata: Information like name, labels, and namespace.\n- spec: Desired state of the resource (e.g., container image, replicas, ports).\n- status: (Automatically generated) Current state of the resource."
+                },
+                {
+                    "question": "What is node affinity, pod affinity, taint, and toleration?",
+                    "answer": "- Node Affinity: Rules to schedule Pods on specific nodes based on node labels (e.g., 'run this Pod only on nodes with SSD').\n- Pod Affinity: Rules to schedule Pods relative to other Pods (e.g., 'run this Pod near another Pod with a specific label').\n- Taint: A property of a node that repels Pods unless they have a matching toleration.\n- Toleration: A property of a Pod that allows it to run on a tainted node."
+                },
+                {
+                    "question": "What is NodePort, ClusterIP?",
+                    "answer": "- ClusterIP: The default service type. It exposes the service on an internal IP within the cluster, making it accessible only from inside the cluster.\n- NodePort: Exposes the service on a static port on each node\u2019s IP address. It allows external access to the service."
+                },
+                {
+                    "question": "What are Persistent Volumes and why do we use them?",
+                    "answer": "- Persistent Volume (PV): A piece of storage in the cluster that persists beyond the lifecycle of a Pod.\n- Persistent Volume Claim (PVC): A request for storage by a user or application.\nWe use PVs to ensure data persistence, especially for stateful applications like databases."
+                },
+                {
+                    "question": "Describe what is a Pod and what is its lifecycle?",
+                    "answer": "- Pod: The smallest deployable unit in Kubernetes. It can contain one or more containers that share storage, network, and specifications.\n- Pod Lifecycle:\n  1. Pending: Pod is accepted but not yet scheduled.\n  2. Running: Pod is bound to a node, and containers are running.\n  3. Succeeded: All containers have terminated successfully.\n  4. Failed: At least one container has terminated unsuccessfully.\n  5. Unknown: The state of the Pod cannot be determined."
+                },
+                {
+                    "question": "What are the components on the master and worker node?",
+                    "answer": "- Master Node:\n  - API Server\n  - Scheduler\n  - Controller Manager\n  - etcd\n- Worker Node:\n  - Kubelet: Communicates with the master and manages Pods.\n  - Kube Proxy: Handles network routing and load balancing.\n  - Container Runtime: Runs containers (e.g., Docker, containerd)."
+                },
+                {
+                    "question": "What is an Ingress Controller?",
+                    "answer": "An Ingress Controller manages external access to services in a cluster, typically via HTTP/HTTPS. It uses rules defined in Ingress resources to route traffic to the appropriate services."
+                },
+                {
+                    "question": "What are the types of services in Kubernetes?",
+                    "answer": "- ClusterIP: Internal service within the cluster.\n- NodePort: Exposes the service on a static port on each node.\n- LoadBalancer: Exposes the service externally using a cloud provider\u2019s load balancer.\n- ExternalName: Maps a service to an external DNS name."
+                },
+                {
+                    "question": "How does one Pod talk to another Pod?",
+                    "answer": "Pods communicate using:\n- Service: A stable IP and DNS name assigned to a group of Pods.\n- Environment Variables: Automatically injected into Pods for service discovery.\n- DNS: Kubernetes provides DNS-based service discovery."
+                },
+                {
+                    "question": "How is Pod health check done?",
+                    "answer": "- Liveness Probe: Checks if the container is running. If it fails, the container is restarted.\n- Readiness Probe: Checks if the container is ready to serve traffic. If it fails, the Pod is removed from service endpoints."
+                },
+                {
+                    "question": "How is monitoring done?",
+                    "answer": "- Prometheus: A monitoring tool that scrapes metrics from Kubernetes components and applications.\n- Grafana: A visualization tool that uses Prometheus data to create dashboards.\nIntegration involves deploying Prometheus and Grafana in the cluster and configuring them to collect and display metrics."
+                },
+                {
+                    "question": "What is DaemonSet, ReplicaSet, Horizontal Pod Autoscaler?",
+                    "answer": "- DaemonSet: Ensures a copy of a Pod runs on all (or specific) nodes.\n- ReplicaSet: Maintains a stable set of replica Pods running at any given time.\n- Horizontal Pod Autoscaler (HPA): Automatically scales the number of Pods based on CPU or memory usage."
+                },
+                {
+                    "question": "Write a manifest file of your own choice",
+                    "answer": "```yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: nginx-deployment\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: nginx\n  template:\n    metadata:\n      labels:\n        app: nginx\n    spec:\n      containers:\n      - name: nginx\n        image: nginx:1.14.2\n        ports:\n        - containerPort: 80\n```"
+                },
+                {
+                    "question": "What is a namespace and why do we use it?",
+                    "answer": "A namespace is a virtual cluster within a Kubernetes cluster. It is used to:\n- Organize resources (e.g., dev, prod environments).\n- Isolate resources (e.g., prevent conflicts between teams).\n- Apply resource quotas and policies."
+                },
+                {
+                    "question": "What are Helm charts and their uses?",
+                    "answer": "- Helm: A package manager for Kubernetes.\n- Helm Chart: A collection of pre-configured Kubernetes resources (e.g., Deployments, Services) packaged together.\n- Uses:\n  - Simplify deployment of complex applications.\n  - Enable versioning and sharing of Kubernetes applications.\n  - Provide templating for reusable configurations."
+                }
+            ]
+        },
+        {
+            "category": "linux",
+            "items": [
+                {
+                    "question": "What is booting process in linux?",
+                    "answer": "The Linux booting process involves several stages, including system startup, bootloader execution, loading the kernel image, and executing the init process. It typically starts with the BIOS or UEFI firmware initializing the hardware, followed by the bootloader (like GRUB) loading the kernel into memory and starting the init process, which sets up user space."
+                },
+                {
+                    "question": "What is inode in linux how to increase it?",
+                    "answer": "An inode is a data structure on a filesystem that stores information about a file or directory, such as its size, permissions, and location on disk. To increase the number of inodes, you can reformat the filesystem with a higher inode count or use filesystems that allow dynamic inode allocation."
+                },
+                {
+                    "question": "What is logical volume and how to create it?",
+                    "answer": "A logical volume is a virtual partition created within a volume group in LVM (Logical Volume Manager), allowing for flexible disk management. To create it, you can use the command `lvcreate -n  -L  `."
+                },
+                {
+                    "question": "What is swap partition and how to create?",
+                    "answer": "A swap partition is a designated area on a hard drive used as virtual memory when RAM is full. To create it, you can use `fallocate -l  /swapfile` followed by `mkswap /swapfile` and then `swapon /swapfile`."
+                },
+                {
+                    "question": "Tell me about some commands in linux.",
+                    "answer": "Some common Linux commands include `ls` (list directory contents), `cd` (change directory), `cp` (copy files), `mv` (move files), and `rm` (remove files). Each command has various options to modify its behavior."
+                },
+                {
+                    "question": "How to check the process pot and name(netstat \u2013tulnp)?",
+                    "answer": "To check active network connections along with their associated processes, you can use the command `netstat -tulnp`. This displays TCP/UDP ports along with the PID and name of the program using them."
+                },
+                {
+                    "question": "How to kill a process?",
+                    "answer": "To kill a process in Linux, you can use the command `kill ` where `` is the process ID. For processes that do not terminate with this command, you can use `kill -9 ` to forcefully terminate it."
+                },
+                {
+                    "question": "What are ACLs and firewall and selinux?",
+                    "answer": "ACLs (Access Control Lists) provide a way to define more granular permissions for files than traditional Unix permissions. Firewalls control incoming and outgoing network traffic based on predetermined security rules. SELinux (Security-Enhanced Linux) is a security architecture that provides mechanisms for supporting access control security policies."
+                },
+                {
+                    "question": "How to do the networking using the nmcli?",
+                    "answer": "You can manage network connections using `nmcli`, which is a command-line interface for NetworkManager. Common commands include `nmcli d` to show devices and `nmcli c up ` to activate a connection."
+                },
+                {
+                    "question": "How to manage the disk space ,RAM and memory?",
+                    "answer": "To manage disk space, you can use commands like `df` for disk usage and `du` for directory size. For RAM management, tools like `free` show memory usage, while commands like `top` or `htop` provide insights into memory consumption by processes."
+                },
+                {
+                    "question": "What is TOP command and how to fetch the data?",
+                    "answer": "`top` is a command-line utility that displays real-time information about system processes, including CPU and memory usage. You can simply type `top` in the terminal to view this data."
+                },
+                {
+                    "question": "What is load average in linux systems and what does three components of load average defines?",
+                    "answer": "Load average represents the average number of processes that are either in a runnable or uninterruptible state over one, five, and fifteen minutes. The three components indicate system load over these time intervals."
+                },
+                {
+                    "question": "How to assign the process the required amount of resource allocation?",
+                    "answer": "You can assign resources using commands like `nice` to change process priority or `ulimit` to set limits on resources available to processes. For more advanced control, consider using cgroups."
+                },
+                {
+                    "question": "What is nohup and &?",
+                    "answer": "`nohup` allows a command to continue running after logging out from a session. The ampersand (`&`) at the end of a command runs it in the background, allowing you to continue using the terminal."
+                },
+                {
+                    "question": "User management, file management, log management",
+                    "answer": "`useradd`, `usermod`, and `userdel` are commands for user management; file management includes commands like `cp`, `mv`, and `rm`; log management can be handled with tools like `journalctl` or by viewing logs in `/var/log/`."
+                },
+                {
+                    "question": "How to use FIND command and search for logs older than 7 days?",
+                    "answer": "`find /path/to/logs -type f -mtime +7` will search for files older than 7 days in specified logs directory."
+                },
+                {
+                    "question": "How to block the ip address in linux?",
+                    "answer": "`iptables -A INPUT -s  -j DROP` will block incoming traffic from a specified IP address. Replace `` with the actual IP you want to block."
+                }
+            ]
+        },
+        {
+            "category": "shell-script",
+            "items": [
+                {
+                    "question": "Write a shell script to fetch the data from rest api and take out the required fileds",
+                    "answer": "``````\n\nThis script uses `curl` to fetch data from a REST API and `jq` to parse the JSON response and extract specific fields [6].  Make sure `jq` is installed (`sudo apt-get install jq`) [6]. Replace `https://api.example.com/data` with your API endpoint and `.field1` and `.field2` with the actual JSON keys you want to extract [6]. The `-s` option in curl makes it silent, and `jq -r` extracts raw text [6]."
+                },
+                {
+                    "question": "Write a shell script to extract the number of alphabets characters and digits and tell the count",
+                    "answer": "``````\n\nThis script uses `grep` with character classes `[:alpha:]` to find alphabets and `[:digit:]` to find digits [6]. `wc -l` counts the number of lines, which corresponds to the number of matching characters."
+                },
+                {
+                    "question": "Write a shell script to extract the ip addresss from a file and the count of similar ipadress",
+                    "answer": "``````\n\nThis script uses `awk` to find potential IP addresses, then `sort` and `uniq -c` to count occurrences of each IP address [6].  It then iterates through the unique IP addresses and their counts, printing each one [6]. Create a file named `input.txt` in the same directory as the script, and add the data from which you want to extract the IP addresses."
+                },
+                {
+                    "question": "Write a shell script to hit the rest api and modify the json data and put it back to the database",
+                    "answer": "``````\n\nThis script fetches data from a REST API, modifies it using `jq`, and then sends the modified data back using a PUT request [6].  Ensure that the API supports PUT requests and that you adjust the `jq` command to modify the correct fields [6]. Replace `https://api.example.com/data/123` with your API endpoint."
+                },
+                {
+                    "question": "How to declare an array in shell script",
+                    "answer": "In a shell script, you can declare an array using the following syntax:\n\n`array_name=(element1 element2 element3)`\n\nFor example:\n\n`my_array=(item1 item2 item3)`\n\nYou can access elements of the array using their index:\n\n`echo ${my_array[0]}`  # Accesses the first element (item1)\n`echo ${my_array[@]}` #Accesses all elements\n"
+                },
+                {
+                    "question": "What is crontab and tell some time set you have done",
+                    "answer": "`crontab` is a utility used to schedule commands to be executed periodically at specific times [8]. Each user has their own `crontab` file where they can define their scheduled tasks [8].\n\nA crontab entry has the following format:\n\n`minute hour day_of_month month day_of_week command`\n\nFor example, to run a script daily at midnight:\n\n`0 0 * * * /path/to/your/script.sh`\n\nAnother example, to run a script every Monday at 2:30 AM:\n\n`30 2 * * 1 /path/to/your/script.sh`\n"
+                },
+                {
+                    "question": "Why do we give #!/bin/sh at start of shell script",
+                    "answer": "The `#!/bin/sh` at the beginning of a shell script is called a shebang [6]. It tells the operating system which interpreter to use to execute the script [6]. In this case, it specifies that the script should be executed using the `sh` shell [6]."
+                },
+                {
+                    "question": "Write a shell script to find old logs and archive it",
+                    "answer": "``````\n\nThis script finds log files older than a specified number of days and archives them using `tar` [6]. Adjust the `LOG_DIR`, `DAYS`, and `ARCHIVE_DIR` variables to suit your needs.  It first creates the archive directory if it doesn't exist, then finds files older than the specified number of days [6].  It then archives each file and removes the original log file [6]."
+                },
+                {
+                    "question": "What is $#,$?,$@ etc.. in linux shell script",
+                    "answer": "In Linux shell scripting, the following special variables are commonly used:\n\n*   `$#`: Represents the number of arguments passed to the script.\n*   `$@`: Represents all the arguments passed to the script as individual words. It preserves the separation between arguments.\n*   `$*`: Represents all the arguments passed to the script as a single word. It joins all arguments into one string, separated by the first character of the IFS (Internal Field Separator) variable (by default, a space).\n*   `$?`: Represents the exit status of the most recently executed command. A value of 0 usually indicates success, while a non-zero value indicates an error.\n*   `$$`: Represents the process ID (PID) of the current script.\n*   `$!`: Represents the process ID of the most recently executed background command.\n*   `$0`: Represents the name of the script being executed."
+                }
+            ]
+        },
+        {
+            "category": "ci-cd",
+            "items": [
+                {
+                    "question": "Tell the design of CICD in your organization",
+                    "answer": "The CI/CD design typically involves several stages: Continuous Integration (CI) where developers frequently integrate code into a shared repository, followed by automated testing to ensure code quality. Continuous Delivery (CD) automates the deployment process to production or staging environments. Tools like Jenkins orchestrate these processes, integrating with version control systems, testing frameworks, and deployment tools to ensure a smooth workflow."
+                },
+                {
+                    "question": "What are various plugins in your Jenkins",
+                    "answer": "Jenkins supports over 1800 plugins. Some key plugins include:\n- **Git Plugin**: Integrates Jenkins with Git repositories.\n- **Kubernetes Plugin**: Manages Jenkins agents in Kubernetes.\n- **Jira Plugin**: Connects Jenkins with Jira for issue tracking.\n- **Docker Plugin**: Allows Jenkins to use Docker containers as build environments.\n- **SonarQube Plugin**: Integrates SonarQube for code quality analysis [1][3]."
+                },
+                {
+                    "question": "What is difference between declarative and scripted pipeline",
+                    "answer": "Declarative pipelines provide a simplified syntax for defining pipelines in Jenkins, focusing on stages and steps with clear structure. Scripted pipelines offer more flexibility and control, allowing the use of Groovy code for complex logic. Declarative pipelines are generally easier to read and maintain, while scripted pipelines are better suited for advanced use cases."
+                },
+                {
+                    "question": "What is a groovy file and write groovy script what you have worked on",
+                    "answer": "A Groovy file is a script written in the Groovy programming language, often used in Jenkins for defining jobs and pipelines. Here's an example of a simple Groovy script that prints 'Hello World':\n``````\nThis script can be executed within a Jenkins pipeline to perform specific tasks."
+                },
+                {
+                    "question": "How each tool is integrated with Jenkins",
+                    "answer": "Tools are integrated with Jenkins through plugins or APIs. For example:\n- **Git**: Integrated via the Git plugin for source code management.\n- **Docker**: Integrated using the Docker plugin to build and deploy containers.\n- **SonarQube**: Integrated through the SonarQube plugin for code quality analysis during builds.\n- **Jira**: Integrated using the Jira plugin to track issues related to builds."
+                },
+                {
+                    "question": "Tell me the shell scripts used in Jenkins",
+                    "answer": "Shell scripts in Jenkins are often used for build automation tasks. Common examples include:\n- Scripts to compile code, run tests, or deploy applications.\n- Scripts that automate environment setup before running builds.\n- Cleanup scripts that remove old build artifacts or logs."
+                },
+                {
+                    "question": "How the auto increment of version is done in UI and MS",
+                    "answer": "Auto-incrementing version numbers can be implemented using build scripts that modify version files based on the build number or timestamp. In a UI application, this might involve updating a version field in configuration files during the build process. In Microsoft environments, tools like MSBuild can be configured to automatically update assembly version attributes based on specified rules."
+                },
+                {
+                    "question": "What is global credentials and how to mask the passwords",
+                    "answer": "Global credentials in Jenkins are stored securely and can be accessed by any job within the Jenkins instance. To mask passwords, you can use the 'Credentials' plugin which allows you to store sensitive information like passwords securely. When using these credentials in scripts or pipeline definitions, they are masked automatically in logs."
+                },
+                {
+                    "question": "What is sonarqube and how you define the thresholds",
+                    "answer": "SonarQube is an open-source platform for continuous inspection of code quality. It analyzes code for bugs, vulnerabilities, and code smells. Thresholds can be defined in SonarQube by setting quality gates that specify conditions under which a project is considered acceptable based on metrics like code coverage, duplication, and maintainability ratings."
+                }
+            ]
+        },
+        {
+            "category": "git",
+            "items": [
+                {
+                    "question": "What is branching strategy used",
+                    "answer": "Common Git branching strategies include:\n\n- **Feature Branching**: Developers create a separate branch for each new feature or bug fix [2]. This allows working on new features without affecting the main codebase [2].\n- **GitFlow**: A branching strategy that uses multiple branches to organize development and manage releases [2]. It includes main branches for production-ready code and other branches for ongoing development [1].\n- **GitHub Flow**: A lightweight branching strategy suitable for small teams that need to release new features and bug fixes quickly [2]. The `main` branch should always be deployable [2].\n- **Trunk-Based Development (TBD)**: Developers merge changes directly to a shared `trunk` branch [2]. This branch should be ready for release at any time [2]."
+                },
+                {
+                    "question": "How you make the push rules, access level grants",
+                    "answer": "Push rules and access level grants are typically configured in the Git repository management tool (e.g., GitLab or GitHub). These settings restrict who can push changes to specific branches. Access levels can be set for different roles (e.g., developers, maintainers) to control their permissions."
+                },
+                {
+                    "question": "What is git pull and git fetch difference",
+                    "answer": "`git fetch` downloads objects and refs from another repository [8]. `git pull` is used to update the current branch [8]. `git pull` is essentially a combination of `git fetch` followed by `git merge` [8]."
+                },
+                {
+                    "question": "What is git stash and git rebase",
+                    "answer": "`git stash` temporarily saves changes that you don't want to commit immediately [8]. This allows you to switch branches or perform other tasks without committing unfinished work [8]. `git rebase` integrates changes from one branch into another by moving or combining a sequence of commits to a new base commit [8]."
+                },
+                {
+                    "question": "What is git revert",
+                    "answer": "`git revert` creates a new commit that undoes the changes made in a previous commit. This is a safe way to undo changes, as it doesn't alter the commit history."
+                },
+                {
+                    "question": "What is cherry pick",
+                    "answer": "Cherry-picking allows you to select specific commits from one branch and apply them to another branch. This is useful for incorporating specific changes without merging the entire branch."
+                },
+                {
+                    "question": "How you resolve the merge conflicts",
+                    "answer": "Merge conflicts occur when Git cannot automatically merge changes from two branches. Resolving merge conflicts typically involves:\n\n1.  Identifying the conflicting files.\n2.  Opening the files and examining the conflict markers (e.g., `<<<<<<<`, `=======`, `>>>>>>>`).\n3.  Manually editing the files to resolve the conflicts.\n4.  Staging the resolved files (`git add`).\n5.  Committing the changes (`git commit`)."
+                },
+                {
+                    "question": "What is git clone",
+                    "answer": "`git clone` is a command used to create a local copy of a remote repository. It downloads all the code, history, and branches from the remote repository to your local machine."
+                },
+                {
+                    "question": "How you designed your gilab CI",
+                    "answer": "A GitLab CI pipeline typically consists of stages defined in a `.gitlab-ci.yml` file. These stages can include building, testing, and deploying the application. Each stage contains jobs that execute specific scripts. GitLab CI integrates with other tools to automate the software development process."
+                },
+                {
+                    "question": "What is diiferenec between Gitlab and github",
+                    "answer": "GitLab and GitHub are both web-based Git repository managers. Key differences include:\n\n*   **Pricing**: GitHub offers free public repositories, while GitLab provides more features in its free tier.\n*   **CI/CD**: GitLab has built-in CI/CD capabilities, whereas GitHub relies on third-party integrations like Jenkins or GitHub Actions.\n*   **Self-Hosting**: GitLab can be self-hosted, giving users more control over their data and infrastructure."
+                },
+                {
+                    "question": "How the Jenkins talks with Gitlab",
+                    "answer": "Jenkins can integrate with GitLab using plugins such as the GitLab Plugin. This allows Jenkins to trigger builds based on GitLab events (e.g., push, merge request) and update commit statuses in GitLab. The plugin uses the GitLab API to communicate between Jenkins and GitLab."
+                }
+            ]
+        },
+        {
+            "category": "aws",
+            "items": [
+                {
+                    "question": "What is VPC and its components (Public, private, NACL, Route tables, Internet gateway)",
+                    "answer": "A VPC (Virtual Private Cloud) is a virtual network dedicated to your AWS account [1]. It allows you to launch AWS resources into a virtual network that you've defined [1].\n\nKey components include:\n\n*   **Public Subnets:** Subnets that have a route to the internet gateway, allowing resources within them to connect to the internet [6].\n*   **Private Subnets:** Subnets that do not have a direct route to the internet gateway, typically used for resources that should not be directly accessible from the internet [3].\n*   **NACL (Network Access Control List):** A virtual firewall that controls inbound and outbound traffic at the subnet level [1].\n*   **Route Tables:** Determine where network traffic from your subnet or gateway is directed [1][2].\n*   **Internet Gateway:** Connects your VPC to the internet, enabling communication between resources in your VPC and the internet [1][2]."
+                },
+                {
+                    "question": "What is differenece between NACL and Security groups",
+                    "answer": "Network ACLs (NACLs) and Security Groups both act as firewalls, but they differ in several ways:\n\n*   **Scope:** NACLs operate at the subnet level, while Security Groups operate at the instance level.\n*   **Statefulness:** Security Groups are stateful, meaning that if you allow inbound traffic, the outbound traffic is automatically allowed [2]. NACLs are stateless, requiring explicit rules for both inbound and outbound traffic.\n*   **Rules:** NACLs have numbered rules that are evaluated in order, while Security Groups evaluate all rules.\n*   **Default Behavior:** NACLs deny all traffic by default unless explicitly allowed, while Security Groups allow all outbound traffic by default and deny all inbound traffic unless explicitly allowed."
+                },
+                {
+                    "question": "What is diffrenet types of load balance and tell diffrenece between Network and application load balancer",
+                    "answer": "AWS offers different types of load balancers:\n\n*   **Application Load Balancer (ALB)**: Best suited for load balancing of HTTP and HTTPS traffic. It operates at the application layer (Layer 7 of the OSI model) [2].\n*   **Network Load Balancer (NLB)**: Best suited for load balancing of TCP, UDP, and TLS traffic where extreme performance is required. It operates at the transport layer (Layer 4 of the OSI model).\n*   **Classic Load Balancer (CLB)**: Provides basic load balancing across multiple Amazon EC2 instances and operates at both the transport (Layer 4) and application (Layer 7) layers."
+                },
+                {
+                    "question": "What is route 53, types of routing policy and routing used",
+                    "answer": "Amazon Route 53 is a scalable and highly available Domain Name System (DNS) web service. It translates domain names into IP addresses, enabling users to access your applications [1].\n\nTypes of routing policies include:\n\n*   **Simple Routing**: Routes traffic to a single resource.\n*   **Weighted Routing**: Routes traffic to multiple resources based on assigned weights.\n*   **Latency Routing**: Routes traffic to the resource with the lowest latency for the user.\n*   **Failover Routing**: Routes traffic to a primary resource; if it fails, traffic is routed to a secondary resource.\n*   **Geolocation Routing**: Routes traffic based on the geographic location of the user."
+                },
+                {
+                    "question": "What is ASG and Launch config",
+                    "answer": "An Auto Scaling Group (ASG) is a collection of EC2 instances that are treated as a logical grouping for the purposes of automatic scaling and management. A Launch Configuration (or Launch Template) specifies the instance type, AMI, security groups, and other parameters used to launch new instances in the ASG."
+                },
+                {
+                    "question": "How to restore the login into ec2 if pem file is lost",
+                    "answer": "If you lose your PEM file, you can't directly restore access to your EC2 instance. However, you can create a new key pair and associate it with the instance by:\n\n1.  Stopping the instance.\n2.  Detaching the root volume.\n3.  Launching a temporary instance with the same AMI in the same availability zone.\n4.  Attaching the detached volume to the temporary instance.\n5.  Modifying the `authorized_keys` file to include the new public key.\n6.  Detaching the volume from the temporary instance.\n7.  Reattaching the volume to the original instance.\n8.  Starting the original instance."
+                },
+                {
+                    "question": "How to encrypt the unencrypted AMI",
+                    "answer": "To encrypt an unencrypted AMI, you can copy the unencrypted AMI, and during the copy process, enable encryption. This creates a new, encrypted AMI."
+                },
+                {
+                    "question": "What is EBS and EFS",
+                    "answer": "EBS (Elastic Block Storage) provides block-level storage volumes for use with EC2 instances [1]. EBS volumes are attached to a single EC2 instance and are suitable for workloads that require persistent storage [1]. EFS (Elastic File System) provides a scalable, elastic, and fully managed network file system that can be accessed by multiple EC2 instances concurrently [1]."
+                },
+                {
+                    "question": "What is VPC pearing and VPC endpoint",
+                    "answer": "*   **VPC Peering**: A networking connection between two VPCs that enables you to route traffic between them privately [2].\n*   **VPC Endpoint**: Enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection [2]."
+                },
+                {
+                    "question": "What is S3/types of S3 bucket/S3 bucket policy/S3lifecycle",
+                    "answer": "Amazon S3 (Simple Storage Service) is an object storage service that offers scalability, data availability, security, and performance [1].\n\nTypes of S3 storage classes include:\n\n*   **S3 Standard**: For frequently accessed data.\n*   **S3 Intelligent-Tiering**: Automatically moves data to the most cost-effective tier based on access patterns.\n*   **S3 Standard-IA**: For infrequently accessed data.\n*   **S3 One Zone-IA**: Lower-cost option for infrequently accessed data that does not require multiple Availability Zone resilience.\n*   **S3 Glacier**: For long-term archive.\n*   **S3 Glacier Deep Archive**: Lowest-cost storage for long-term archive.\n\n**S3 Bucket Policies:** JSON documents that specify who has access to your S3 bucket and what actions they can perform.\n\n**S3 Lifecycle Policies:** Automate moving objects to different storage classes or deleting them after a specified period."
+                },
+                {
+                    "question": "What is IAM roles and how the cross region roles work",
+                    "answer": "IAM (Identity and Access Management) roles are used to grant permissions to AWS services and users to access AWS resources. Cross-region roles involve creating a role in one AWS region and allowing users or services in another region to assume that role. This requires configuring trust relationships and appropriate permissions."
+                },
+                {
+                    "question": "How to tell one Ec2 to talk to other ec2 in other region",
+                    "answer": "To enable communication between EC2 instances in different regions, you can use VPC peering or a transit gateway [2]. VPC peering creates a direct network connection between the VPCs, while a transit gateway acts as a central hub for routing traffic between multiple VPCs and regions [2]."
+                },
+                {
+                    "question": "What is MYsql Aurora/Backup plan done/Masetr and reader endpoints/Failover mechanism",
+                    "answer": "Amazon Aurora is a MySQL and PostgreSQL-compatible relational database engine that combines the speed and availability of high-end commercial databases with the simplicity and cost-effectiveness of open-source databases.\n\n*   **Backup Plan:** Aurora backups are continuous and incremental, enabling point-in-time recovery.\n*   **Master and Reader Endpoints:** Aurora provides a master endpoint for write operations and reader endpoints for read operations, distributing the read load across multiple read replicas.\n*   **Failover Mechanism:** In case of a failure, Aurora automatically promotes a read replica to become the new master, minimizing downtime."
+                },
+                {
+                    "question": "What is CFT template/how a resource depends on other resource",
+                    "answer": "A CloudFormation (CFT) template is a JSON or YAML file that describes the AWS resources you want to create. Resources can depend on each other, meaning that one resource must be created before another. You define these dependencies explicitly in the template using the `DependsOn` attribute or implicitly through resource properties."
+                },
+                {
+                    "question": "What are importanat components of CFT",
+                    "answer": "Important components of a CloudFormation template include:\n\n*   **Resources:** Define the AWS resources you want to create.\n*   **Parameters:** Allow you to input custom values when you create or update a stack.\n*   **Mappings:** Define conditional values based on a region or other criteria.\n*   **Outputs:** Define values that are returned when the stack is created."
+                },
+                {
+                    "question": "Which is faster storage EBS or S3",
+                    "answer": "EBS (Elastic Block Storage) generally offers faster storage performance compared to S3 (Simple Storage Service) because EBS volumes are block-level storage directly attached to EC2 instances [1]. S3 is object storage accessed over a network."
+                }
+            ]
+        },
+        {
+            "category": "ansible",
+            "items": [
+                {
+                    "question": "What is Ansible architecture",
+                    "answer": "Ansible architecture consists of a control node and managed nodes. The control node is where Ansible commands are executed, while managed nodes are the devices being automated. Ansible connects to these nodes and pushes small programs called Ansible modules to them, which are designed to be idempotent, meaning they only make changes when necessary [1][2]. Ansible uses a simple language (YAML) for its playbooks, allowing users to describe automation jobs in an easily understandable way [1][4]."
+                },
+                {
+                    "question": "How a normal yaml file is different from Ansible playbook",
+                    "answer": "A normal YAML file is a data serialization format used for configuration files, while an Ansible playbook is a specific type of YAML file that defines a series of tasks to be executed on managed nodes. Ansible playbooks include structured data such as hosts, tasks, variables, and modules that dictate how automation should occur [1][4]."
+                },
+                {
+                    "question": "What is Ansible playbook, define all terms in playbook",
+                    "answer": "An Ansible playbook is a YAML file that contains instructions for automation tasks. Key terms in a playbook include:\n- **Hosts**: Specifies the target machines on which tasks will be executed.\n- **Tasks**: Defines the actions to be performed on the hosts.\n- **Modules**: The units of work that Ansible executes (e.g., installing packages, copying files).\n- **Variables**: Allow customization of playbooks by defining values that can be reused.\n- **Roles**: A way to organize tasks and files into reusable components [1][4]."
+                },
+                {
+                    "question": "What is handlers and notifiers",
+                    "answer": "Handlers are special tasks in Ansible that are triggered by notifications from other tasks. They are typically used for actions that should only occur when there is a change (e.g., restarting a service after configuration changes). Notifiers are directives within tasks that call handlers when certain conditions are met [1][5]."
+                },
+                {
+                    "question": "What are resgisters",
+                    "answer": "Registers in Ansible are used to capture the output of a task so it can be referenced later in the playbook. This allows you to store data generated by tasks and use it in subsequent tasks or conditions [1][5]."
+                },
+                {
+                    "question": "What are various modules you have used in Ansible",
+                    "answer": "Various modules commonly used in Ansible include:\n- **apt**: Manages packages on Debian-based systems.\n- **yum**: Manages packages on Red Hat-based systems.\n- **copy**: Copies files from the control node to managed nodes.\n- **template**: Processes Jinja2 templates and deploys them to managed nodes.\n- **service**: Manages services (start, stop, restart) on managed nodes [1][4]."
+                },
+                {
+                    "question": "How to used when condition and loops in Ansible",
+                    "answer": "In Ansible, `when` conditions can be applied to tasks to control their execution based on variable values or facts. For example:\n``````\nLoops can be implemented using `with_items`, `with_dict`, or similar constructs. For example:\n`````` [1][5]."
+                },
+                {
+                    "question": "Write a playbook to start a service, stop a service and check the health check of service",
+                    "answer": "---\n- hosts: all\n  tasks:\n    - name: Start the service\n      service:\n        name: httpd\n        state: started\n\n    - name: Stop the service\n      service:\n        name: httpd\n        state: stopped\n\n    - name: Check health of service\n      command: systemctl status httpd\n      register: result\n\n    - debug:\n        var: result.stdout_lines\n"
+                },
+                {
+                    "question": "What are Ansible adhoc commands",
+                    "answer": "Ansible ad-hoc commands are simple one-line commands used for quick tasks without creating a full playbook. They allow users to execute modules directly on managed nodes. For example:\n``````\nThis command pings all hosts defined in the inventory [1][5]."
+                },
+                {
+                    "question": "What are roles and tell where you will keep the diffrenet files in diffrenet folders",
+                    "answer": "Roles in Ansible allow you to organize related tasks, variables, files, templates, and handlers into separate directories for better structure and reusability. The typical directory structure for a role includes:\n``````\nThis organization helps manage complex playbooks more effectively [1][5]."
+                },
+                {
+                    "question": "What is Ansible vault and how you store the secret files",
+                    "answer": "Ansible Vault is a feature that allows you to encrypt sensitive data within your playbooks or variable files. You can create encrypted files using the command:\n``````\nTo edit an existing vault file, use:\n``````\nYou can also encrypt variables directly within playbooks using `!vault` syntax [1][5]."
+                },
+                {
+                    "question": "How the SSH connectivity takes place between two server in Ansible",
+                    "answer": "Ansible uses SSH for connecting to managed nodes. The control node initiates an SSH connection to each managed node using the credentials specified in the inventory file. No agents need to be installed on managed nodes; instead, SSH keys or passwords authenticate access [1][2]. To facilitate connectivity, SSH keys must be set up properly between the control node and managed nodes."
+                }
+            ]
+        },
+        {
+            "category": "security-monitoring",
+            "items": [
+                {
+                    "question": "What is SAT and DAST",
+                    "answer": "SAT (Static Application Testing) analyzes source code without executing it to identify vulnerabilities early in the development process [1][3][4]. DAST (Dynamic Application Security Testing) involves running the application and testing it from the outside to find security flaws during runtime [1][3]. Static testing assesses code and documentation [4], while dynamic testing gives bugs/bottlenecks in the software system [4]."
+                },
+                {
+                    "question": "How fortify rules are placed? Can we changes the rules",
+                    "answer": "Fortify, a static application security testing (SAST) tool, uses rules to identify potential vulnerabilities in source code. These rules are typically based on coding standards, security best practices, and known vulnerability patterns. Fortify typically allows customization of these rules, enabling organizations to tailor the analysis to their specific needs and compliance requirements."
+                },
+                {
+                    "question": "Diffrenet types of fortify errros and resolution",
+                    "answer": "Fortify identifies various types of errors, including:\n\n*   **SQL Injection**: Occurs when user-controlled data is used to construct SQL queries, potentially allowing attackers to execute arbitrary SQL code.\n*   **Cross-Site Scripting (XSS)**: Occurs when an application includes untrusted data in its output without proper validation or escaping, enabling attackers to inject malicious scripts into web pages.\n*   **Path Traversal**: Occurs when an application allows users to access files or directories outside of the intended scope.\n*   **Cryptographic Issues**: Occurs when cryptographic algorithms are used incorrectly or weak algorithms are used.\n\nResolutions typically involve code changes to validate inputs, sanitize outputs, use parameterized queries, and implement secure coding practices."
+                },
+                {
+                    "question": "Blackduck errors",
+                    "answer": "Black Duck is a software composition analysis (SCA) tool that identifies and manages open-source components in your codebase. Black Duck errors typically relate to:\n\n*   **Vulnerable Components**: Identification of open-source libraries with known security vulnerabilities.\n*   **License Compliance**: Violations of open-source licenses.\n*   **Outdated Components**: Use of outdated versions of open-source libraries.\n\nResolutions involve updating vulnerable components, addressing license violations, and implementing policies to manage open-source usage."
+                },
+                {
+                    "question": "How the new relic is integrated with each microservice",
+                    "answer": "New Relic is integrated with microservices by installing New Relic agents within each microservice's environment. These agents collect performance data, metrics, and logs, which are then sent to the New Relic platform for analysis and monitoring."
+                },
+                {
+                    "question": "What is SLO,SLI, SLA",
+                    "answer": "*   **SLO (Service Level Objective)**: An internal target for service performance (e.g., 99.9% uptime).\n*   **SLI (Service Level Indicator)**: A metric that measures service performance (e.g., response time, error rate).\n*   **SLA (Service Level Agreement)**: A formal agreement with customers that defines the expected level of service and guarantees (e.g., financial penalties for not meeting SLOs)."
+                },
+                {
+                    "question": "What are the diffrenet dashboards created in New relic and Grafana",
+                    "answer": "Dashboards in New Relic and Grafana are used to visualize and monitor key metrics and performance indicators. Common dashboards include:\n\n*   **Application Performance Monitoring (APM)**: Tracks response time, throughput, error rates, and resource consumption for applications.\n*   **Infrastructure Monitoring**: Monitors CPU usage, memory utilization, disk I/O, and network traffic for servers and infrastructure components.\n*   **Database Monitoring**: Tracks database query performance, connection pools, and slow queries.\n*   **Custom Dashboards**: Tailored dashboards that display specific metrics and insights relevant to the application or service."
+                }
+            ]
+        },
+        {
+            "category": "managerial",
+            "items": [
+                {
+                    "question": "Tell me what was your most difficult situation you faced and you resolved",
+                    "answer": "In a previous role, we encountered a critical system outage during a peak usage period due to an unexpected interaction between two microservices. This resulted in significant user impact and potential financial losses. To resolve it, I quickly assembled a cross-functional team comprising developers, operations engineers, and security experts. We initiated a comprehensive incident response process, involving real-time monitoring, log analysis, and root cause analysis. The team identified the conflicting microservice interaction and implemented a temporary workaround to restore service within an hour. Following the restoration, we conducted a thorough post-incident review, developed a permanent solution involving code refactoring and improved system monitoring, and implemented preventative measures to avoid similar issues in the future. This experience underscored the importance of teamwork, clear communication, and a proactive approach to problem-solving."
+                },
+                {
+                    "question": "When you had issue with your management and how you convince them",
+                    "answer": "I recall a situation where management wanted to implement a new software deployment process that, in my opinion, would have increased deployment time and risks due to a lack of proper testing. To address this concern, I prepared a detailed presentation highlighting the potential drawbacks, including increased error rates, longer rollback times, and potential negative impacts on user experience. I then proposed an alternative solution that incorporated automated testing, continuous integration, and a phased rollout approach. I supported my proposal with data from previous projects, industry best practices, and a clear cost-benefit analysis. By presenting a well-reasoned argument supported by evidence, I successfully convinced management to adopt my proposed solution, resulting in a more efficient and reliable deployment process."
+                },
+                {
+                    "question": "How you have helped your peer",
+                    "answer": "In one instance, a peer was struggling with a complex debugging task related to a performance bottleneck in a critical application. I offered to assist by sharing my expertise in performance tuning and code profiling. We paired together, using profiling tools to identify the specific lines of code causing the bottleneck. I then guided my peer through various optimization techniques, such as code refactoring, caching strategies, and database query optimization. By working collaboratively, we were able to significantly improve the application's performance, enabling it to handle increased user load without any issues. This experience reinforced the value of knowledge sharing and teamwork in achieving common goals."
+                },
+                {
+                    "question": "Did you got a chance to convince cutomers for your work",
+                    "answer": "Yes, I had the opportunity to convince customers of the value of our solutions. I presented and demonstrated how the implementation would address their specific pain points and contribute to achieving their strategic objectives. I showcased successful case studies and provided quantifiable metrics demonstrating the positive impact of our solutions. By actively listening to their concerns, addressing their questions, and tailoring my presentation to their unique needs, I established trust and confidence, ultimately securing their buy-in."
+                },
+                {
+                    "question": "How the Jira tasks are assigned to your team",
+                    "answer": "Jira tasks are assigned to the team through a combination of methods: sprint planning meetings, team lead assignments, and self-assignment. During sprint planning, the team collaboratively estimates the effort required for each task and assigns it to individuals based on their skills, availability, and interests. The team lead also assigns tasks based on project priorities and individual expertise. Team members are also encouraged to self-assign tasks to promote ownership and accountability. This multi-faceted approach ensures efficient task distribution and promotes a sense of shared responsibility."
+                },
+                {
+                    "question": "Tell me what your manager told negative point about you",
+                    "answer": "One area my manager highlighted for improvement was my tendency to overcommit myself to multiple tasks, occasionally leading to delays in task completion. To address this, I have since implemented better time management techniques, including prioritizing tasks based on urgency and importance, using project management tools for tracking progress, and setting realistic deadlines. Additionally, I've improved my communication with my manager and team members to proactively address potential roadblocks or constraints and avoid overcommitment. I regularly seek feedback to ensure I'm managing my workload effectively."
+                },
+                {
+                    "question": "Tell me you put time significant outside your work",
+                    "answer": "Outside of work, I volunteer as a mentor for a local coding bootcamp. I dedicate several hours each week to helping aspiring developers learn new programming languages, build software projects, and prepare for job interviews. It's incredibly rewarding to help others achieve their career goals, and it also keeps me updated on the latest industry trends and technologies. Additionally, I find that teaching others reinforces my own understanding of technical concepts."
+                },
+                {
+                    "question": "Critical feedback from colleague and you worked",
+                    "answer": "I once received feedback from a colleague that my communication style could sometimes come across as too direct, potentially causing misunderstandings or hurt feelings. I took this feedback seriously and made a conscious effort to be more mindful of my communication style. I actively practiced active listening, sought to understand different perspectives, and tailored my communication to suit the audience. I also sought feedback from my colleague on my progress, which helped me refine my approach and improve my communication skills. Over time, my colleagues noticed a positive change, and I established stronger working relationships."
+                },
+                {
+                    "question": "Give me an example of calculated risk where speed was critical",
+                    "answer": "During a critical product launch, we discovered a bug in the payment processing module just hours before the scheduled release. While the ideal solution would have been to thoroughly test and fix the bug, delaying the launch would have resulted in significant financial and reputational damage. After assessing the potential impact and likelihood of the bug occurring in a production environment, we decided to implement a temporary workaround that would mitigate the bug's impact while allowing the launch to proceed as planned. We carefully monitored the system in real-time and had a rollback plan in place if the bug did surface. Ultimately, the workaround was successful, and we released the product on time without any major issues. This experience demonstrated the importance of calculated risk-taking, quick decision-making, and effective communication in high-pressure situations."
+                },
+                {
+                    "question": "You worked on deadline and did not had options before taking descion",
+                    "answer": "In a previous project, we faced a tight deadline to deliver a new feature for a major client. Due to unforeseen technical challenges and resource constraints, it became apparent that we would not be able to complete all aspects of the feature on time. With no options to extend the deadline or increase resources, I convened a meeting with the team and the client to discuss the situation openly. We collaboratively identified the core functionality that was essential for the client's immediate needs and agreed to prioritize those aspects while deferring less critical components to a later release. This decision allowed us to deliver a working product on time, meet the client's immediate requirements, and maintain their satisfaction. It highlighted the importance of transparency, collaboration, and adaptability in overcoming challenging circumstances."
+                }
+            ]
+        },
+        {
+        "category": "jenkins",
+        "items": [
+                {
+                    "question": "Uh oh, Questions of Jenkins not yet added",
+                    "answer": "coming sooooooooooooon !!!!!!"
+                }
+            ]   
+        }
+
+    ]
+}
