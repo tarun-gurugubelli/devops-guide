@@ -3,6 +3,7 @@ import "@/styles/globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Link from "next/link"
+import { MobileNav } from "@/components/mobile-nav"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -25,7 +26,7 @@ export default function RootLayout({
             <Link href="/" className="font-semibold text-lg">
               DevOps
             </Link>
-            <nav className="flex gap-6">
+            <nav className="hidden md:flex gap-6">
               <Link href="/modules" className="text-sm font-medium hover:text-primary">
                 Modules
               </Link>
@@ -39,6 +40,7 @@ export default function RootLayout({
                 Contact
               </Link>
             </nav>
+            <MobileNav />
           </div>
         </header>
         {children}
