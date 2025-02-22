@@ -114,6 +114,12 @@ export default function ModulesPage() {
               Browse All Questions
             </Link>
           </Button>
+          <Button asChild size="lg">
+            <Link href="/installations">
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Browse Installation Steps
+            </Link>
+          </Button>
           <Button asChild variant="outline" size="lg">
             <Link href="/contact">
               <School className="w-4 h-4 mr-2" />

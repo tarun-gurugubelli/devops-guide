@@ -32,6 +32,9 @@ export default function RootLayout({
               <Link href="/questions" className="text-sm font-medium hover:text-primary">
                 All Qn's
               </Link>
+              <Link href="/installations" className="text-sm font-medium hover:text-primary">
+                Installations
+              </Link>
               <Link href="/contact" className="text-sm font-medium hover:text-primary">
                 Contact
               </Link>
