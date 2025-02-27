@@ -19,7 +19,7 @@ export function MobileNav() {
       </SheetTrigger>
       <SheetContent side="right">
         <SheetHeader>
-          <SheetTitle>DevAnswers</SheetTitle>
+          <SheetTitle>Devops</SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col gap-4 mt-4">
           <Link href="/modules" className="text-sm font-medium hover:text-primary" onClick={() => setOpen(false)}>

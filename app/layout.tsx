@@ -22,29 +22,30 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <header className="border-b">
-          <div className="container mx-auto px-4 h-14 flex items-center justify-between">
-            <Link href="/" className="font-semibold text-lg">
-              DevOps
+        <div className="container mx-auto px-4 h-14 flex items-center justify-between">
+          <Link href="/" className="flex items-baseline">
+            <span className="font-semibold text-lg">DevOps</span>
+            <span className="text-xs font-light ml-1">by Tarun Gurugubelli</span>
+          </Link>
+          <nav className="hidden md:flex gap-6">
+            <Link href="/modules" className="text-sm font-medium hover:text-primary">
+              Modules
             </Link>
-            <nav className="hidden md:flex gap-6">
-              <Link href="/modules" className="text-sm font-medium hover:text-primary">
-                Modules
-              </Link>
-              <Link href="/questions" className="text-sm font-medium hover:text-primary">
-                All Qn's
-              </Link>
-              <Link href="/installations" className="text-sm font-medium hover:text-primary">
-                Installations
-              </Link>
-              <Link href="/cheatsheets" className="text-sm font-medium hover:text-primary">
-                Cheatsheets
-              </Link>
-              <Link href="/contact" className="text-sm font-medium hover:text-primary">
-                Contact
-              </Link>
-            </nav>
-            <MobileNav />
-          </div>
+            <Link href="/questions" className="text-sm font-medium hover:text-primary">
+              All Qn's
+            </Link>
+            <Link href="/installations" className="text-sm font-medium hover:text-primary">
+              Installations
+            </Link>
+            <Link href="/cheatsheets" className="text-sm font-medium hover:text-primary">
+              Cheatsheets
+            </Link>
+            <Link href="/contact" className="text-sm font-medium hover:text-primary">
+              Contact
+            </Link>
+          </nav>
+          <MobileNav />
+        </div>
         </header>
         {children}
         <footer className="border-t py-6">
