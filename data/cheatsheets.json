@@ -1,0 +1,196 @@
+{
+  "cheatsheets": [
+    {
+      "title": "Docker",
+      "icon": "docker",
+      "description": "Essential Docker commands for container management",
+      "categories": [
+        {
+          "name": "Container Management",
+          "commands": [
+            { "command": "docker ps", "description": "List running containers" },
+            { "command": "docker ps -a", "description": "List all containers" },
+            { "command": "docker start [container]", "description": "Start a container" },
+            { "command": "docker stop [container]", "description": "Stop a container" },
+            { "command": "docker rm [container]", "description": "Remove a container" },
+            { "command": "docker logs [container]", "description": "View container logs" }
+          ]
+        },
+        {
+          "name": "Image Management",
+          "commands": [
+            { "command": "docker images", "description": "List all images" },
+            { "command": "docker pull [image]", "description": "Pull an image" },
+            { "command": "docker build -t [name] .", "description": "Build an image from Dockerfile" },
+            { "command": "docker rmi [image]", "description": "Remove an image" }
+          ]
+        },
+        {
+          "name": "Network & Volume",
+          "commands": [
+            { "command": "docker network ls", "description": "List networks" },
+            { "command": "docker volume ls", "description": "List volumes" },
+            { "command": "docker-compose up", "description": "Start services from docker-compose.yml" },
+            { "command": "docker-compose down", "description": "Stop docker-compose services" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Git",
+      "icon": "git",
+      "description": "Common Git commands for version control",
+      "categories": [
+        {
+          "name": "Basic Commands",
+          "commands": [
+            { "command": "git init", "description": "Initialize a new Git repository" },
+            { "command": "git clone [url]", "description": "Clone a repository" },
+            { "command": "git add [file]", "description": "Add file to staging area" },
+            { "command": "git commit -m '[message]'", "description": "Commit staged changes" },
+            { "command": "git status", "description": "Check repository status" }
+          ]
+        },
+        {
+          "name": "Branch Operations",
+          "commands": [
+            { "command": "git branch", "description": "List branches" },
+            { "command": "git branch [name]", "description": "Create a new branch" },
+            { "command": "git checkout [branch]", "description": "Switch to branch" },
+            { "command": "git merge [branch]", "description": "Merge branch into current branch" }
+          ]
+        },
+        {
+          "name": "Remote Operations",
+          "commands": [
+            { "command": "git remote add origin [url]", "description": "Add remote repository" },
+            { "command": "git push origin [branch]", "description": "Push to remote branch" },
+            { "command": "git pull origin [branch]", "description": "Pull from remote branch" },
+            { "command": "git fetch", "description": "Download objects from remote" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Kubernetes",
+      "icon": "kubernetes",
+      "description": "Kubernetes commands for container orchestration",
+      "categories": [
+        {
+          "name": "Pod Management",
+          "commands": [
+            { "command": "kubectl get pods", "description": "List all pods" },
+            { "command": "kubectl describe pod [name]", "description": "Show pod details" },
+            { "command": "kubectl logs [pod]", "description": "View pod logs" },
+            { "command": "kubectl delete pod [name]", "description": "Delete a pod" }
+          ]
+        },
+        {
+          "name": "Deployment",
+          "commands": [
+            { "command": "kubectl apply -f [file]", "description": "Apply a configuration" },
+            { "command": "kubectl get deployments", "description": "List deployments" },
+            { "command": "kubectl rollout status", "description": "Check rollout status" },
+            { "command": "kubectl rollout undo", "description": "Rollback deployment" }
+          ]
+        },
+        {
+          "name": "Service & Scaling",
+          "commands": [
+            { "command": "kubectl get services", "description": "List all services" },
+            { "command": "kubectl scale deployment", "description": "Scale deployment" },
+            { "command": "kubectl port-forward", "description": "Forward port to pod" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Linux",
+      "icon": "linux",
+      "description": "Essential Linux commands for system administration",
+      "categories": [
+        {
+          "name": "File Operations",
+          "commands": [
+            { "command": "ls -la", "description": "List all files with details" },
+            { "command": "cd [directory]", "description": "Change directory" },
+            { "command": "cp [source] [dest]", "description": "Copy files" },
+            { "command": "mv [source] [dest]", "description": "Move/rename files" },
+            { "command": "rm [file]", "description": "Remove files" }
+          ]
+        },
+        {
+          "name": "System Information",
+          "commands": [
+            { "command": "top", "description": "Show running processes" },
+            { "command": "df -h", "description": "Show disk usage" },
+            { "command": "free -h", "description": "Show memory usage" },
+            { "command": "uname -a", "description": "Show system information" }
+          ]
+        },
+        {
+          "name": "User Management",
+          "commands": [
+            { "command": "useradd [user]", "description": "Create new user" },
+            { "command": "passwd [user]", "description": "Change password" },
+            { "command": "sudo [command]", "description": "Run as superuser" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Jenkins",
+      "icon": "jenkins",
+      "description": "Jenkins pipeline and administration commands",
+      "categories": [
+        {
+          "name": "Pipeline",
+          "commands": [
+            { "command": "jenkins-jobs list", "description": "List all jobs" },
+            { "command": "jenkins-jobs update [job]", "description": "Update job" },
+            { "command": "jenkins-jobs delete [job]", "description": "Delete job" }
+          ]
+        },
+        {
+          "name": "CLI Commands",
+          "commands": [
+            { "command": "java -jar jenkins-cli.jar", "description": "Run Jenkins CLI" },
+            { "command": "jenkins-cli who-am-i", "description": "Show current user" },
+            { "command": "jenkins-cli safe-restart", "description": "Safely restart Jenkins" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "PostgreSQL",
+      "icon": "postgresql",
+      "description": "PostgreSQL database management commands",
+      "categories": [
+        {
+          "name": "Database Operations",
+          "commands": [
+            { "command": "\\l", "description": "List all databases" },
+            { "command": "\\c [database]", "description": "Connect to database" },
+            { "command": "\\dt", "description": "List all tables" },
+            { "command": "\\d [table]", "description": "Describe table" }
+          ]
+        },
+        {
+          "name": "User Management",
+          "commands": [
+            { "command": "CREATE USER [name]", "description": "Create new user" },
+            { "command": "ALTER USER [name]", "description": "Modify user" },
+            { "command": "DROP USER [name]", "description": "Delete user" }
+          ]
+        },
+        {
+          "name": "Backup & Restore",
+          "commands": [
+            { "command": "pg_dump [database]", "description": "Backup database" },
+            { "command": "psql [database]", "description": "Restore database" }
+          ]
+        }
+      ]
+    }
+  ]
+}
