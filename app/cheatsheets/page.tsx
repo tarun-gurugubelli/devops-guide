@@ -16,7 +16,7 @@ const IconMap = {
 } as const
 
 async function getCheatsheets() {
-  const filePath = path.join(process.cwd(), "/devops-guide/data/cheatsheets.json")
+  const filePath = path.join(process.cwd(), "public/data/cheatsheets.json")
   const fileContent = await fs.readFile(filePath, "utf8")
   const data: CheatsheetData = JSON.parse(fileContent)
   return data.cheatsheets
