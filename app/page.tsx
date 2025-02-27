@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import PipelineAnimation from "@/components/pipeline-animation"
 
 export default function LandingPage() {
   return (
@@ -20,6 +21,11 @@ export default function LandingPage() {
               Explore Now <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
+
+          {/* Pipeline Animation */}
+          <div className="w-full mt-16 animate-in slide-in-from-bottom duration-500 delay-500">
+            <PipelineAnimation />
+          </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
