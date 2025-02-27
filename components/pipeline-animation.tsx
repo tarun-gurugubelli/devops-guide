@@ -116,7 +116,7 @@ export default function PipelineAnimation() {
                 activeStage === 3 ? "text-primary" : "text-muted-foreground"
               }`}
             >
-              Containerize
+              Store
             </span>
           </div>
 
