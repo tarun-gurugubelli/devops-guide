@@ -31,6 +31,9 @@ export function MobileNav() {
           <Link href="/installations" className="text-sm font-medium hover:text-primary" onClick={() => setOpen(false)}>
             Installations
           </Link>
+          <Link href="/cheatsheets" className="text-sm font-medium hover:text-primary" onClick={() => setOpen(false)}>
+            Cheatsheets
+          </Link>
           <Link href="/contact" className="text-sm font-medium hover:text-primary" onClick={() => setOpen(false)}>
             Contact
           </Link>

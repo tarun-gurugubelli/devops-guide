@@ -36,6 +36,9 @@ export default function RootLayout({
               <Link href="/installations" className="text-sm font-medium hover:text-primary">
                 Installations
               </Link>
+              <Link href="/cheatsheets" className="text-sm font-medium hover:text-primary">
+                Cheatsheets
+              </Link>
               <Link href="/contact" className="text-sm font-medium hover:text-primary">
                 Contact
               </Link>
